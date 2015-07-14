@@ -9,6 +9,7 @@ public class Partner {
     @Element public String partner_name;
     @Element(required=false) public String partner_image;
     @Element(required=false) public String partner_offers;
-    //@Element public String url;
+    @Element(required=false) public String partner_address;
+    @Element(required=false) public String partner_link;
 
 }

@@ -1,6 +1,7 @@
 package org.esn_spain.activity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -12,34 +13,30 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
-import android.support.v7.widget.AppCompatSpinner;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import org.esn_spain.R;
 import org.esn_spain.fragment.EventsFragment;
 import org.esn_spain.fragment.MembersFragment;
 import org.esn_spain.fragment.PartnersFragment;
 import org.esn_spain.helper.C;
 import org.esn_spain.helper.Utils;
+import org.esn_spain.model.SectionItem;
 import org.esn_spain.model.simple.Data;
-import org.esn_spain.model.simple.esn.Galaxy;
-import org.esn_spain.model.simple.esn.Section;
 import org.esn_spain.network.DataManager;
-import org.esn_spain.spinner.TwoLinesSpinnerAdapter;
-import org.esn_spain.spinner.TwoLinesSpinnerItem;
 import java.util.ArrayList;
 import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import icepick.Icicle;
 
 public class MainActivity extends BaseActivity implements
         ViewPager.OnPageChangeListener,
-        DataManager.OnGalaxyAvailableListener,
         DataManager.OnSectionContentLoadedListener {
 
     public static boolean SHOW_KEYLINES;
@@ -48,23 +45,24 @@ public class MainActivity extends BaseActivity implements
     @Bind(R.id.toolbar)   Toolbar mToolbar;
     @Bind(R.id.tabs)      TabLayout mTabs;
     @Bind(R.id.viewpager) ViewPager mViewPager;
-    @Nullable @Bind(R.id.section_spinner) AppCompatSpinner mSpinner;
+    @Nullable @Bind(R.id.section) LinearLayout mSection;
+    @Nullable @Bind(R.id.title) TextView mTitle;
+    @Nullable @Bind(R.id.subtitle) TextView mSubtitle;
 
-    private Galaxy mGalaxy;
     private SharedPreferences mPreferences;
     private TabsAdapter mTabsAdapter;
-    @Icicle protected String mSectionId;
-    @Icicle protected Section mSection;
-    @Icicle protected String mSectionUrl;
+    public static String mSectionUrl;
 
-    public String getBaseUrl() {
-        return mSectionUrl;
+    private static SectionItem currentSection;
+
+    public static SectionItem getCurrentSection() {
+        return currentSection;
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        DataManager.from(this).requestGalaxy(this);
+        //DataManager.from(this).requestGalaxy(this);
         mSectionUrl = "http://www.esnmurcia.es";
         loadPreferences();
         setContentView(SHOW_KEYLINES ? R.layout.activity_main_keylines : R.layout.activity_main);
@@ -74,50 +72,30 @@ public class MainActivity extends BaseActivity implements
         ActionBar ab = getSupportActionBar();
         if (ab != null) ab.setDisplayShowTitleEnabled(false);
 
-        initTabs();
-        //mToolbar.setTitle(mTabsAdapter.getPageTitle(0));
-    }
+        if (currentSection != null) {
+            if (mTitle != null) mTitle.setText(currentSection.getName());
+            if (mSubtitle != null) mSubtitle.setText(currentSection.getUniversity());
+        }
+        else {
+            if (mTitle != null) mTitle.setText("ESN Murcia");
+            if (mSubtitle != null) mSubtitle.setText("Universidad de Murcia");
+        }
 
-    @Override
-    public void onGalaxyAvailable(Galaxy galaxy) {
-        mGalaxy = galaxy;
-        if (mSpinner != null) {
-            mSpinner.setAdapter(getTwoLinesSpinnerAdapter());
-            mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        if (mSection != null) {
+            mSection.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    TwoLinesSpinnerItem selected = (TwoLinesSpinnerItem) mSpinner.getAdapter().getItem(position);
-                    mSectionId = selected.getSectionId();
-                    mSection = mGalaxy.findSectionById(mSectionId);
-                    if (mSection.getFile() != null)
-                        DataManager.from(MainActivity.this).loadSectionContent(mSection.getFile(), MainActivity.this);
-                }
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-                    mSectionId = null;
-                    mSection = null;
+                public void onClick(View v) {
+                    startActivityForResult(new Intent(MainActivity.this, SectionChooserActivity.class), 1);
                 }
             });
         }
+
+        initTabs();
     }
 
     @Override
     public void onSectionContentLoaded(Data data) {
 
-    }
-
-
-    private TwoLinesSpinnerAdapter getTwoLinesSpinnerAdapter() {
-        List<TwoLinesSpinnerItem> items = new ArrayList<>();
-        for (Section section: mGalaxy.getCountry(0).getActiveSections()) {
-            TwoLinesSpinnerItem item = new TwoLinesSpinnerItem(
-                    section.getName(),
-                    section.getUniversity().getName(),
-                    section.getId()
-            );
-            items.add(item);
-        }
-        return new TwoLinesSpinnerAdapter(this, R.layout.spinner_item_two_lines, items);
     }
 
     @Override
@@ -130,6 +108,9 @@ public class MainActivity extends BaseActivity implements
     @Override @SuppressLint("CommitPrefEdits")
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            /*case R.id.action_section_chooser:
+                startActivityForResult(new Intent(this, SectionChooserActivity.class), 1);
+                return true;*/
             case R.id.show_keylines:
                 item.setChecked(!item.isChecked());
                 mPreferences.edit().putBoolean("SHOW_KEYLINES", item.isChecked()).commit();
@@ -137,6 +118,28 @@ public class MainActivity extends BaseActivity implements
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == 1) {
+            Bundle b = data.getExtras();
+            SectionItem selectedSection = (SectionItem) b.getSerializable("SECTION_SELECTED");
+            if (selectedSection != null && currentSection != selectedSection) {
+                currentSection = selectedSection;
+                if (mTitle != null) mTitle.setText(currentSection.getName());
+                if (mSubtitle != null) mSubtitle.setText(currentSection.getUniversity());
+                // cambiar también aquí la url
+                if (mTabsAdapter != null) {
+                    for (int i=0; i<mTabsAdapter.getCount(); i++) {
+                        SwipeRefreshLayout.OnRefreshListener f
+                                = (SwipeRefreshLayout.OnRefreshListener) mTabsAdapter.getItem(i);
+                        f.onRefresh();
+                    }
+                }
+            }
+        }
     }
 
     private void loadPreferences() {
@@ -164,7 +167,14 @@ public class MainActivity extends BaseActivity implements
                 tab.getIcon().setColorFilter(getTabIconColor(0, i), PorterDuff.Mode.SRC_IN);
             }
         }
+        /*if (mTitle != null && mSubtitle != null) {
+            mTitle.setText("ESN Murcia");
+            mSubtitle.setText(mTabsAdapter.getPageTitle(0));
+        }
+        else mToolbar.setTitle(mTabsAdapter.getPageTitle(0)); */
     }
+
+
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -174,7 +184,10 @@ public class MainActivity extends BaseActivity implements
 
     @Override
     public void onPageSelected(int position) {
-        //mToolbar.setTitle(mTabsAdapter.getPageTitle(position));
+        /*if (mSubtitle != null) {
+            mSubtitle.setText(mTabsAdapter.getPageTitle(position));
+        }
+        else mToolbar.setTitle(mTabsAdapter.getPageTitle(position)); */
         if (Utils.isPortrait(MainActivity.this)) {
             for (int i=0; i<mTabsAdapter.getCount(); i++) {
                 Drawable tabIcon = mTabs.getTabAt(i).getIcon();

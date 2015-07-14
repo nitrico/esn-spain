@@ -14,7 +14,7 @@ public class Event {
     @Element(required=false) public String event_place;
     @Element(required=false) public String event_price;
     @Element(required=false) public String event_link;
+    @Element(required=false) public String event_type;
     @Element(required=false) public String event_body;
-    //@Element public String url;
 
 }

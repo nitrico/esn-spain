@@ -30,11 +30,11 @@ public abstract class BaseActivity extends AppCompatActivity {
         Icepick.saveInstanceState(this, outState);
     }
 
-    protected void setTaskDescriptionColor(int color) {
-        setTaskDescriptionColor(color, R.mipmap.ic_launcher);
+    protected void setTaskDescription(int color) {
+        setTaskDescription(color, R.mipmap.ic_launcher);
     }
 
-    protected void setTaskDescriptionColor(int color, int iconResource) {
+    protected void setTaskDescription(int color, int iconResource) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Bitmap bm = BitmapFactory.decodeResource(getResources(), iconResource);
             ActivityManager.TaskDescription td = new ActivityManager.TaskDescription(null, bm, color);

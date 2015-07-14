@@ -33,7 +33,6 @@ public class EventsFragment extends Fragment implements
     @Bind(R.id.swipe_refresh) SwipeRefreshLayout mSwipeRefreshLayout;
     @Bind(R.id.recycler_view) RecyclerView mRecyclerView;
 
-    private List<Object> mItems; // List<Object> o List<Event>
     private RecyclerMultiAdapter mAdapter;
 
     public EventsFragment() { }
@@ -47,38 +46,39 @@ public class EventsFragment extends Fragment implements
         mSwipeRefreshLayout.setOnRefreshListener(this);
 
         Activity activity = getActivity();
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(activity));
         mRecyclerView.setLayoutManager(Utils.isPortrait(activity)
                 ? new LinearLayoutManager(activity)
                 : new GridLayoutManager(activity, 2));
 
-        if (mItems == null || mAdapter == null) onRefresh();
+        mAdapter = SmartAdapter.empty()
+                .map(Event.class, EventView.class)
+                .map(Header.class, HeaderView.class)
+                .into(mRecyclerView);
+
+        onRefresh();
         return view;
     }
 
     @Override
     public void onEventsLoaded(Events events) {
-        mSwipeRefreshLayout.setRefreshing(false);
-        //mItems = events.get();
-        // en vez de la línea anterior:
-        // encontrar los próximos eventos
-        mItems = new ArrayList<>();
+        if (mSwipeRefreshLayout != null) mSwipeRefreshLayout.setRefreshing(false);
+
+        List<Object> mItems = new ArrayList<>();
         mItems.add(new Header("Próximos eventos"));
         mItems.addAll(events.getNext());
         mItems.add(new Header("Eventos pasados"));
         mItems.addAll(events.getPast());
 
-        mAdapter = SmartAdapter
-                .items(mItems)
-                .map(Event.class, EventView.class)
-                .map(Header.class, HeaderView.class)
-                .into(mRecyclerView);
+        if (mAdapter != null) {
+            mAdapter.clearItems();
+            mAdapter.addItems(mItems);
+        }
     }
 
     @Override
     public void onRefresh() {
         MainActivity activity = (MainActivity) getActivity();
-        DataManager.from(activity).loadEvents(activity.getBaseUrl() +"/events/xml", this);
+        DataManager.from(activity).loadEvents(MainActivity.mSectionUrl +"/events/xml", this);
     }
 
 }

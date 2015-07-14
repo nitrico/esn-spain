@@ -23,5 +23,11 @@
         <!--<item name="android:src">@drawable/ic_esn</item> to change the icon -->
         <item name="android:description">@string/abc_action_menu_overflow_description</item>
     </style>
+    
+    
+    <style name="PopUpTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowCloseOnTouchOutside">true</item>
+    </style>
 
 </resources>

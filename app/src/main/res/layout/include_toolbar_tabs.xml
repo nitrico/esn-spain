@@ -12,17 +12,31 @@
         app:titleMarginStart="16dp"
         app:popupTheme="@style/MyToolbarTheme" >
         <!--<include layout="@layout/include_toolbar_title" />-->
-
-        <!-- style="@style/Base.Widget.AppCompat.Spinner.Underlined" -->
-        <android.support.v7.widget.AppCompatSpinner
-            android:id="@+id/section_spinner"
+        <LinearLayout
+            android:id="@+id/section"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginLeft="8dp"
-            android:spinnerMode="dropdown"
-            android:background="@null"
-            app:spinnerMode="dropdown"
-            style="@style/Base.Widget.AppCompat.Spinner" />
+            android:gravity="center_vertical"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:orientation="vertical" >
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="16sp" />
+            <TextView
+                android:id="@+id/subtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:textColor="#CFFF"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
+        </LinearLayout>
+
     </android.support.v7.widget.Toolbar>
 
     <android.support.design.widget.TabLayout

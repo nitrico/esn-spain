@@ -4,11 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="activities.MainActivity" >
 
-    <item
+    <!--<item
+        android:id="@+id/action_section_chooser"
+        android:title="Change ESN section"
+        app:showAsAction="never" />-->
+
+    <!--<item
         android:id="@+id/action_start"
         android:title="Start"
         android:orderInCategory="100"
-        app:showAsAction="never" />
+        app:showAsAction="never" />-->
     <!--<item
         android:id="@+id/header"
         android:title="Header 1"

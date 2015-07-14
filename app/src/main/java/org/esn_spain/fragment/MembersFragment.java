@@ -30,7 +30,6 @@ public class MembersFragment extends Fragment implements
     @Bind(R.id.swipe_refresh) SwipeRefreshLayout mSwipeRefreshLayout;
     @Bind(R.id.recycler_view) RecyclerView mRecyclerView;
 
-    private List<Member> mItems;
     private RecyclerMultiAdapter mAdapter;
 
     public MembersFragment() { }
@@ -44,29 +43,33 @@ public class MembersFragment extends Fragment implements
         mSwipeRefreshLayout.setOnRefreshListener(this);
 
         Activity activity = getActivity();
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(activity));
         mRecyclerView.setLayoutManager(Utils.isPortrait(activity)
                 ? new LinearLayoutManager(activity)
                 : new GridLayoutManager(activity, 2));
 
-        if (mItems == null || mAdapter == null) onRefresh();
+        mAdapter = SmartAdapter.empty()
+                .map(Member.class, MemberView.class)
+                .into(mRecyclerView);
+
+        onRefresh();
         return view;
     }
 
     @Override
     public void onMembersLoaded(Members items) {
-        mSwipeRefreshLayout.setRefreshing(false);
-        mItems = items.get();
-        mAdapter = SmartAdapter
-                .items(mItems)
-                .map(Member.class, MemberView.class)
-                .into(mRecyclerView);
+        if (mSwipeRefreshLayout != null) mSwipeRefreshLayout.setRefreshing(false);
+
+        List<Member> mItems = items.get();
+        if (mAdapter != null) {
+            mAdapter.clearItems();
+            mAdapter.addItems(mItems);
+        }
     }
 
     @Override
     public void onRefresh() {
         MainActivity activity = (MainActivity) getActivity();
-        DataManager.from(activity).loadMembers(activity.getBaseUrl() + "/members/xml", this);
+        DataManager.from(activity).loadMembers(MainActivity.mSectionUrl + "/members/xml", this);
     }
 
 }

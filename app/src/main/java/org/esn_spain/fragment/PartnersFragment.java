@@ -30,7 +30,6 @@ public class PartnersFragment extends Fragment implements
     @Bind(R.id.swipe_refresh) SwipeRefreshLayout mSwipeRefreshLayout;
     @Bind(R.id.recycler_view) RecyclerView mRecyclerView;
 
-    private List<Partner> mItems;
     private RecyclerMultiAdapter mAdapter;
 
     public PartnersFragment() { }
@@ -49,24 +48,29 @@ public class PartnersFragment extends Fragment implements
                 ? new LinearLayoutManager(activity)
                 : new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
 
-        if (mItems == null || mAdapter == null) onRefresh();
+        mAdapter = SmartAdapter.empty()
+                .map(Partner.class, PartnerView.class)
+                .into(mRecyclerView);
+
+        onRefresh();
         return view;
     }
 
     @Override
     public void onPartnersLoaded(Partners items) {
-        mSwipeRefreshLayout.setRefreshing(false);
-        mItems = items.get();
-        mAdapter = SmartAdapter
-                .items(mItems)
-                .map(Partner.class, PartnerView.class)
-                .into(mRecyclerView);
+        if (mSwipeRefreshLayout != null) mSwipeRefreshLayout.setRefreshing(false);
+
+        List<Partner> mItems = items.get();
+        if (mAdapter != null) {
+            mAdapter.clearItems();
+            mAdapter.addItems(mItems);
+        }
     }
 
     @Override
     public void onRefresh() {
         MainActivity activity = (MainActivity) getActivity();
-        DataManager.from(activity).loadPartners(activity.getBaseUrl() + "/partners/xml", this);
+        DataManager.from(activity).loadPartners(MainActivity.mSectionUrl + "/partners/xml", this);
     }
 
 }
