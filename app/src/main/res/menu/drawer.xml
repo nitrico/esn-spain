@@ -1,0 +1,101 @@
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group
+        android:id="@+id/drawer_main"
+        android:checkableBehavior="single"
+        android:orderInCategory="1" >
+
+        <item
+            android:id="@+id/drawer_activities"
+            android:checked="true"
+            android:icon="@drawable/ic_event_white_24dp"
+            android:title="Actividades" />
+        <item
+            android:id="@+id/drawer_discounts"
+            android:icon="@drawable/ic_credit_card_white_24dp"
+            android:title="Descuentos" />
+        <item
+            android:id="@+id/drawer_projects"
+            android:icon="@drawable/ic_favorite_border_white_24dp"
+            android:title="Proyectos" />
+        <item
+            android:id="@+id/drawer_info"
+            android:icon="@drawable/ic_info_outline_white_24dp"
+            android:title="Información" />
+        <!--<item
+            android:id="@+id/drawer_social"
+            android:icon="@drawable/ic_group_white_24dp"
+            android:title="Redes sociales" />-->
+
+        <!--<item
+            android:id="@+id/drawer_section"
+            android:title="ESN Murcia">
+
+            <menu>
+
+
+            </menu>
+
+        </item>-->
+        <!--<item
+            android:id="@+id/drawer_settings"
+            android:icon="@drawable/ic_settings_white_24dp"
+            android:title="Ajustes" />-->
+
+    </group>
+
+    <!--<item
+        android:id="@+id/drawer_projects_group"
+        android:icon="@drawable/ic_favorite_border_white_24dp"
+        android:title="Proyectos" >
+        <menu>
+            <item
+                android:id="@+id/drawer_se"
+                android:icon="@drawable/ic_group_white_24dp"
+                android:title="SocialErasmus" />
+            <item
+                android:id="@+id/drawer_eis"
+                android:icon="@drawable/ic_school_white_24dp"
+                android:title="Erasmus in Schools" />
+
+            <item
+                android:id="@+id/drawer_ea"
+                android:icon="@drawable/ic_call_made_white_24dp"
+                android:title="ExchangeAbility" />
+        </menu>
+    </item>-->
+
+
+    <!--<group
+        android:id="@+id/drawer_second" >
+
+        <item
+            android:id="@+id/drawer_social"
+            android:icon="@drawable/ic_group_white_24dp"
+            android:title="Redes sociales" />
+
+        <item
+           android:id="@+id/nav_help"
+           android:icon="@drawable/ic_help_outline_white_24dp"
+           android:title="Ayuda y soporte" />
+    </group>-->
+
+    <group
+        android:id="@+id/drawer_third"
+        android:orderInCategory="100" >
+
+        <item
+            android:id="@+id/drawer_settings"
+            android:icon="@drawable/ic_settings_white_24dp"
+            android:title="Ajustes" />
+
+        <!--<item
+            android:id="@+id/nav_help"
+            android:icon="@drawable/ic_help_outline_white_24dp"
+            android:title="Ayuda y soporte" />-->
+    </group>
+
+
+
+</menu>

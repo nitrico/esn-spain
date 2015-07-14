@@ -1,0 +1,27 @@
+<resources>
+
+    <style name="AppTheme" parent="AppTheme.Base" />
+
+    <style name="AppTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">
+        <!--<item name="colorPrimary">@color/cyan</item>
+        <item name="colorPrimaryDark">#60000000</item>
+        <item name="colorAccent">@color/pink</item>
+        <item name="android:windowBackground">@color/window_background</item>-->
+        <item name="colorControlHighlight">@color/selected_nav_background</item>
+    </style>
+
+
+
+    <style name="MyToolbarTheme" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <!--<item name="android:layout_height">@dimen/app_bar_height</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColorSecondary">#67000000</item>-->   <!-- #67000000 o @color/white -->
+        <item name="android:actionOverflowButtonStyle">@style/MyToolbarTheme.OverflowButton</item>
+    </style>
+
+    <style name="MyToolbarTheme.OverflowButton" parent="Base.Widget.AppCompat.ActionButton.Overflow">
+        <!--<item name="android:src">@drawable/ic_esn</item> to change the icon -->
+        <item name="android:description">@string/abc_action_menu_overflow_description</item>
+    </style>
+
+</resources>

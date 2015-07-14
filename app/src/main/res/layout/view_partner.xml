@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- quitar el fondo blanco, el margen y la elevation  para ponerlo como tarjeta -->
+<!--android:background="@color/white"
+    android:layout_marginTop="1dp"
+    android:layout_marginBottom="7dp"
+    android:elevation="2dp" -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/partner"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical" >
+
+    <!--android:background="?android:attr/selectableItemBackground"
+        android:clickable="true"-->
+    <RelativeLayout
+        android:id="@+id/partner_header"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+        <!-- android:background="@drawable/image_background_border" -->
+        <ImageView
+            android:id="@+id/partner_image"
+            android:layout_width="80dp"
+            android:layout_height="56dp"
+            android:layout_margin="16dp"
+            android:padding="4dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/image_background_border"
+            android:adjustViewBounds="true"
+            tools:ignore="RtlHardcoded"/>
+        <LinearLayout
+            android:id="@+id/partner_box"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="56dp"
+            android:layout_toRightOf="@id/partner_image"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginRight="16dp"
+            android:gravity="center_vertical"
+            android:orientation="vertical" >
+            <TextView
+                android:id="@+id/partner_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="0dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/dark_gray"
+                android:textStyle="bold"
+                android:maxLines="2" />
+            <TextView
+                android:id="@+id/partner_subtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                android:textColor="@color/gray"
+                android:maxLines="2" />
+        </LinearLayout>
+        <TextView
+            android:id="@+id/partner_text"
+            android:layout_below="@id/partner_box"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingBottom="4dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+            android:textColor="#999" />
+        <LinearLayout
+            android:id="@+id/partner_offers"
+            android:layout_below="@id/partner_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="0dp"
+            android:orientation="vertical" />
+    </RelativeLayout>
+
+    <!--<RelativeLayout
+        android:id="@+id/partner_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:visibility="visible" >
+        <View
+            android:id="@+id/partner_line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#18000000" />
+        <Button
+            android:id="@+id/partner_location"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="6dp"
+            android:gravity="center_vertical"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:minWidth="64dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:textAllCaps="true"
+            android:textColor="@color/black"
+            android:textSize="13sp"
+            android:textStyle="normal"
+            android:text="Ubicación"
+            android:visibility="visible" />
+        <Button
+            android:id="@+id/partner_share"
+            android:layout_below="@id/partner_line"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_toRightOf="@id/partner_location"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="6dp"
+            android:gravity="center_vertical"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:minWidth="64dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:textAllCaps="true"
+            android:textColor="@color/black"
+            android:textSize="13sp"
+            android:textStyle="normal"
+            android:text="Compartir"
+            android:visibility="visible"/>
+    </RelativeLayout>-->
+
+    <!--<View
+        android:id="@+id/partner_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:background="#18000000" />-->
+
+</LinearLayout>

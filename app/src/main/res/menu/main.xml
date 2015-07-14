@@ -1,0 +1,73 @@
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="activities.MainActivity" >
+
+    <item
+        android:id="@+id/action_start"
+        android:title="Start"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+    <!--<item
+        android:id="@+id/header"
+        android:title="Header 1"
+        app:showAsAction="always"
+        app:actionLayout="@layout/menu_item_header" />-->
+            <group
+                android:id="@+id/checkable_group"
+                android:checkableBehavior="all" >
+                <!-- Notice how these items inherit from the group. -->
+                <!--<item
+                    android:id="@+id/tabs"
+                    android:title="Tabs" />
+                <item
+                    android:id="@+id/ab_colors"
+                    android:title="Appbar colors" />
+                <item
+                    android:id="@+id/title_color"
+                    android:title="Title color" />
+                <item
+                    android:id="@+id/custom_title"
+                    android:title="Custom title" />
+                <item
+                    android:id="@+id/dark_action_icons"
+                    android:title="Dark action icons" />
+                <item
+                    android:id="@+id/dark_tab_icons"
+                    android:title="Dark tab icons" />
+                <item
+                    android:id="@+id/dark_background"
+                    android:title="Dark background" />-->
+                <item
+                    android:id="@+id/show_keylines"
+                    android:title="Show keylines" />
+            </group>
+
+            <!--<group android:id="@+id/exclusive_checkable_group"
+                android:checkableBehavior="single">
+                <item android:id="@+id/exclusive_checkable_item_1"
+                    android:title="Item 1" />
+                <item android:id="@+id/exclusive_checkable_item_2"
+                    android:title="Item 2" />
+                <item android:id="@+id/exclusive_checkable_item_3"
+                    android:title="Item 3"
+                    android:checked="true" />
+            </group>-->
+
+    <!--<item android:id="@+id/action_start"
+        android:title="Start"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+
+    <item android:id="@+id/action_login"
+        android:title="Login"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+
+    <item android:id="@+id/action_timeline"
+        android:title="Timeline"
+        android:orderInCategory="100"
+        app:showAsAction="never" />-->
+
+</menu>

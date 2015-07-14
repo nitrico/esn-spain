@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <style name="AppTheme" parent="AppTheme.Base">
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <!--<item name="android:windowTranslucentNavigation">true</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>-->
+        <item name="android:windowTranslucentStatus">true</item>
+
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:windowSharedElementEnterTransition">@transition/change_image_transform</item>
+        <item name="android:windowSharedElementExitTransition">@transition/change_image_transform</item>
+    </style>
+
+
+
+    <style name="NavigationViewTheme" parent="AppTheme.Base">
+        <item name="textAppearanceListItem">@style/TextAppearance.AppCompat.Body2</item>
+        <item name="android:colorEdgeEffect">#6000</item>
+    </style>
+
+    <style name="PinkEdgeEffect">
+        <item name="android:colorEdgeEffect">@color/pink</item>
+    </style>
+
+    <style name="CyanEdgeEffect">
+        <item name="android:colorEdgeEffect">@color/cyan</item>
+    </style>
+
+    <style name="OrangeEdgeEffect">
+        <item name="android:colorEdgeEffect">@color/orange</item>
+    </style>
+
+    <style name="GreenEdgeEffect">
+        <item name="android:colorEdgeEffect">@color/green</item>
+    </style>
+
+    <style name="BlueEdgeEffect">
+        <item name="android:colorEdgeEffect">@color/blue</item>
+    </style>
+
+</resources>

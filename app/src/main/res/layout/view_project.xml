@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <!--android:paddingTop="8dp"
+        android:paddingBottom="8dp"-->
+    <RelativeLayout
+        android:id="@+id/project_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="15dp"
+        android:paddingBottom="16dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp" >
+
+        <!-- android:background="@drawable/image_background_border" -->
+        <ImageView
+            android:id="@+id/project_image"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginRight="16dp"
+            android:padding="4dp"
+            android:scaleType="centerInside"
+            android:background="@drawable/image_background_border" />
+
+        <TextView
+            android:id="@+id/project_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/project_image"
+            android:layout_marginTop="6dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/dark_gray"
+            android:textStyle="bold"
+            android:maxLines="3" />
+
+        <TextView
+            android:id="@+id/project_subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/project_title"
+            android:layout_toRightOf="@id/project_image"
+            android:layout_marginRight="8dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+            android:textColor="#8FFF"
+            android:maxLines="3" />
+
+    </RelativeLayout>
+
+    <!-- android:layout_marginLeft="152dp" -->
+    <View
+        android:id="@+id/project_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="132dp"
+        android:background="#18000000" />
+
+</LinearLayout>

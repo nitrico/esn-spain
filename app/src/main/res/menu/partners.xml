@@ -1,0 +1,19 @@
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="activities.MainActivity" >
+
+    <item android:id="@+id/action_discounts_map"
+        android:title="Mapa"
+        android:icon="@drawable/ic_map_white_24dp"
+        android:orderInCategory="100"
+        app:showAsAction="ifRoom" />
+
+    <item android:id="@+id/action_discounts_info"
+        android:title="Info"
+        android:icon="@drawable/ic_info_white_24dp"
+        android:orderInCategory="100"
+        app:showAsAction="ifRoom" />
+
+</menu>

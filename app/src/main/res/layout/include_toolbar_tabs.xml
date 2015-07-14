@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<merge
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" >
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:contentInsetStart="0dp"
+        app:titleMarginStart="16dp"
+        app:popupTheme="@style/MyToolbarTheme" >
+        <!--<include layout="@layout/include_toolbar_title" />-->
+
+        <!-- style="@style/Base.Widget.AppCompat.Spinner.Underlined" -->
+        <android.support.v7.widget.AppCompatSpinner
+            android:id="@+id/section_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="8dp"
+            android:spinnerMode="dropdown"
+            android:background="@null"
+            app:spinnerMode="dropdown"
+            style="@style/Base.Widget.AppCompat.Spinner" />
+    </android.support.v7.widget.Toolbar>
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tabs"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:tabIndicatorColor="@color/white"
+        app:tabIndicatorHeight="2dp"  />
+
+</merge>
